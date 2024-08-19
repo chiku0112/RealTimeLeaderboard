@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameServiceUnitTests {
-    private static final String TEST_FILE = "test_scores.txt";
+    private static final String TEST_FILE = "src/test/resources/test_scores.txt";
 
     @Test
     public void testPublishScore() throws IOException {
