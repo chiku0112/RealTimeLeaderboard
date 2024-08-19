@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ce927db-01cc-4354-9942-5c062a5c8064" name="Changes" comment="" />
+    <list default="true" id="6ce927db-01cc-4354-9942-5c062a5c8064" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/leaderboard/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/leaderboard/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/leaderboard/models/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/leaderboard/models/Score.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/leaderboard/repository/RedisScoreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/leaderboard/repository/RedisScoreRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/leaderboard/service/ScoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/leaderboard/service/LeaderboardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/leaderboard/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/leaderboard/service/UserService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -21,14 +38,67 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.com.leaderboard.main.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/chiku/IdeaProjects/LeaderBoardService/src/main/java/com/leaderboard",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/chiku/IdeaProjects/LeaderBoardService/src/Main.java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/leaderboard" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/leaderboard/models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.leaderboard.service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.com.leaderboard.main.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.java.com.leaderboard.main.Main" />
+      <module name="LeaderBoardService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.com.leaderboard.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.leaderboard.main.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.leaderboard.main.Main" />
+      <module name="gaming-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.leaderboard.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.com.leaderboard.main.Main" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -45,22 +115,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723810399759</updated>
-      <workItem from="1723810400715" duration="1000" />
+      <workItem from="1723810400715" duration="33367000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
