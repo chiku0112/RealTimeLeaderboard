@@ -3,11 +3,10 @@ package com.leaderboard.models;
 public class Score {
     private int scoreId;
     private int playerId;
-    private Double score;
+    private int score;
     private String timestamp;
 
-    // Constructors, getters, and setters
-    public Score(int scoreId, int playerId, Double score, String timestamp) {
+    public Score(int scoreId, int playerId, int score, String timestamp) {
         this.scoreId = scoreId;
         this.playerId = playerId;
         this.score = score;
@@ -30,11 +29,11 @@ public class Score {
         this.playerId = playerId;
     }
 
-    public Double getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(Double score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

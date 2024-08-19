@@ -31,8 +31,8 @@ public class UserService {
         }
     }
 
-    public User getUser(int id){
-        return userStore.get(id);
+    public String getUserName(int id){
+        return userStore.get(id).getUsername();
     }
 
     public void verifyPlayer(int id){

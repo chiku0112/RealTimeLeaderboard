@@ -2,7 +2,8 @@ package com.leaderboard.main;
 
 import com.leaderboard.enums.UserType;
 import com.leaderboard.models.Score;
-import com.leaderboard.service.ScoreService;
+import com.leaderboard.service.GameService;
+import com.leaderboard.service.LeaderboardService;
 import com.leaderboard.service.UserService;
 
 import java.util.List;
@@ -16,27 +17,20 @@ public class Main {
         userService.registerUser(1, "ayushi", UserType.ADMIN);
         userService.registerUser(2, "rishabh", UserType.PLAYER);
         userService.registerUser(3, "vito", UserType.PLAYER);
-        userService.registerUser(4, "kiran", UserType.PLAYER);
-        userService.registerUser(5, "mehul", UserType.PLAYER);
-        userService.registerUser(6, "lavi", UserType.PLAYER);
 
+        String scoreFilePath = "src/main/resources/scores.txt";
+        GameService gameService = new GameService(scoreFilePath);
+        LeaderboardService leaderboardService = LeaderboardService.getInstance(scoreFilePath);
 
-        ScoreService scoreService = ScoreService.getInstance();
-        scoreService.publishScore(1, 10);
-        scoreService.publishScore(2, 20);
-        scoreService.publishScore(3, 30);
-        scoreService.publishScore(7, 30);
-        scoreService.publishScore(8, 30);
-
-        // Simulate concurrent score updates
+        // Simulate game play
         Thread thread1 = new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 1; i <=10; i++) {
                 int scored = i*100;
-                scoreService.publishScore(i, scored);
+                gameService.publishScore(i, scored);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -48,7 +42,8 @@ public class Main {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                List<Score> topScores = scoreService.getTopScores(5);
+                leaderboardService.populateRedis();
+                List<Score> topScores = leaderboardService.getTopScores(5);
                 System.out.println();
                 System.out.println("-----------------------------------");
                 System.out.println("Leaderboard: ");
@@ -60,13 +55,13 @@ public class Main {
                 System.out.println("-----------------------------------");
                 System.out.println();
             }
-        }, 0, 2000);
+        }, 0, 1000);
 
         try {
             thread1.join();
             timer.cancel();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
