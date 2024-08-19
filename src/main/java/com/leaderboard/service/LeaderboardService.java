@@ -14,15 +14,15 @@ public class LeaderboardService {
     private UserService userService;
     private String scoreFilePath;;
 
-    private LeaderboardService(String scoreFilePath) {
+    private LeaderboardService(String scoreFilePath, RedisScoreRepository scoreRepository) {
         this.scoreRepository = new RedisScoreRepository();
         this.userService = UserService.getInstance();
         this.scoreFilePath = scoreFilePath;
     }
 
-    public static LeaderboardService getInstance(String scoreFilePath) {
+    public static LeaderboardService getInstance(String scoreFilePath, RedisScoreRepository scoreRepository) {
         if (instance == null) {
-            instance = new LeaderboardService(scoreFilePath);
+            instance = new LeaderboardService(scoreFilePath, scoreRepository);
         }
         return instance;
     }

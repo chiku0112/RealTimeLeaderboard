@@ -2,6 +2,7 @@ package com.leaderboard.main;
 
 import com.leaderboard.enums.UserType;
 import com.leaderboard.models.Score;
+import com.leaderboard.repository.RedisScoreRepository;
 import com.leaderboard.service.GameService;
 import com.leaderboard.service.LeaderboardService;
 import com.leaderboard.service.UserService;
@@ -20,7 +21,7 @@ public class Main {
 
         String scoreFilePath = "src/main/resources/scores.txt";
         GameService gameService = new GameService(scoreFilePath);
-        LeaderboardService leaderboardService = LeaderboardService.getInstance(scoreFilePath);
+        LeaderboardService leaderboardService = LeaderboardService.getInstance(scoreFilePath, new RedisScoreRepository());
 
         // Simulate game play
         Thread thread1 = new Thread(() -> {
