@@ -3,14 +3,16 @@ package com.leaderboard.models;
 public class Score {
     private int scoreId;
     private int playerId;
+    private String playerName;
     private int score;
-    private String timestamp;
+    private int timeTaken;
 
-    public Score(int scoreId, int playerId, int score, String timestamp) {
+    public Score(int scoreId, int playerId, int score, String playerName, int timeTaken) {
         this.scoreId = scoreId;
         this.playerId = playerId;
         this.score = score;
-        this.timestamp = timestamp;
+        this.playerName = playerName;
+        this.timeTaken = timeTaken;
     }
 
     public int getScoreId() {
@@ -37,11 +39,15 @@ public class Score {
         this.score = score;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public int getTimeTaken() {
+        return timeTaken;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setTimeTaken(int timeTaken) {
+        this.timeTaken = timeTaken;
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }

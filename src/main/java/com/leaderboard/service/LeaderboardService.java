@@ -3,7 +3,9 @@ package com.leaderboard.service;
 import com.leaderboard.models.Score;
 import com.leaderboard.repository.RedisScoreRepository;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -34,10 +36,13 @@ public class LeaderboardService {
                 String[] parts = line.split(",");
                 int playerId = Integer.parseInt(parts[0]);
                 int score = Integer.parseInt(parts[1]);
-                publishScore(playerId, score);
+                int timeTaken = Integer.parseInt(parts[2]);
+                publishScore(playerId, score, timeTaken);
             }
         } catch (IOException e) {
             System.out.println("Error reading scores from file: " + e.getMessage());
+        } finally {
+            clearScoreFile();
         }
     }
 
@@ -45,9 +50,9 @@ public class LeaderboardService {
         readScoresFromFileAndPublishToRedis();
     }
 
-    public void publishScore(int playerId, int score) {
+    public String publishScore(int playerId, int score, int timeTaken) {
         userService.verifyPlayer(playerId);
-        scoreRepository.addScore(playerId, score);
+        return scoreRepository.addScore(playerId, score, timeTaken);
     }
 
     public List<Score> getTopScores(int k) {
@@ -61,9 +66,22 @@ public class LeaderboardService {
         System.out.println("++++++++++ | LEADERBOARD | ++++++++");
         for (Score score : topScores) {
             String playerName = userService.getUserName(score.getPlayerId());
-            System.out.println("PlayerID: " + score.getPlayerId() + ", PlayerName: " + playerName + ", Score: " + score.getScore());
+            System.out.println("PlayerID: " + score.getPlayerId() +
+                    ", PlayerName: " + playerName +
+                    ", Score: " + score.getScore() +
+                    ", TimeTaken: " + score.getTimeTaken() + "ms");
+//            System.out.println("PlayerID: " + score.getPlayerId() + ", PlayerName: " + playerName + ", Score: " + score.getScore());
         }
         System.out.println("-----------------------------------");
         System.out.println("-----------------------------------");
+    }
+
+    private void clearScoreFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(scoreFilePath))) {
+            writer.write("");  // Clear the file
+            System.out.println("Score file cleared.");
+        } catch (IOException e) {
+            System.out.println("Error clearing score file: " + e.getMessage());
+        }
     }
 }
