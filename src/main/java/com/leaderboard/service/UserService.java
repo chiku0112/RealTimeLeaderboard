@@ -25,7 +25,7 @@ public class UserService {
         User user = UserFactory.createUser(id, username, userType);
         if(!userStore.containsKey(id)){
             userStore.put(id, user);
-            System.out.println("User: [" + user.getUsername() + "] has been registered.");
+            System.out.println("User: [" + user.getUsername() + "] has joined the game!");
         } else {
             System.out.println("User: [" + user.getUsername() + "] already exists");
         }
@@ -42,4 +42,7 @@ public class UserService {
         }
     }
 
+    public Boolean userExists(int id){
+        return userStore.containsKey(id);
+    }
 }

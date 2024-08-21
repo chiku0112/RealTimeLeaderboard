@@ -53,4 +53,17 @@ public class LeaderboardService {
     public List<Score> getTopScores(int k) {
         return scoreRepository.findTopScores(k);
     }
+
+    public void displayLeaderboard(int k) {
+        List<Score> topScores = getTopScores(k);
+        System.out.println("-----------------------------------");
+        System.out.println("-----------------------------------");
+        System.out.println("++++++++++ | LEADERBOARD | ++++++++");
+        for (Score score : topScores) {
+            String playerName = userService.getUserName(score.getPlayerId());
+            System.out.println("PlayerID: " + score.getPlayerId() + ", PlayerName: " + playerName + ", Score: " + score.getScore());
+        }
+        System.out.println("-----------------------------------");
+        System.out.println("-----------------------------------");
+    }
 }

@@ -18,7 +18,6 @@ public class RedisScoreRepository {
         String member = String.valueOf(playerId);
         try {
             jedis.zadd("scores", score, member);
-            System.out.println("Added score for player " + member);
         } catch (JedisConnectionException e) {
             System.out.println("Error adding score for player " + member + ": " + e.getMessage());
         } catch (Exception e) {
