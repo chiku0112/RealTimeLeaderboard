@@ -33,7 +33,7 @@ public class LeaderboardServiceTest {
 
     @Test
     public void testPublishScoreForNonexistentUser() {
-        leaderboardService.publishScore(99, 500); // Nonexistent user should be created
+        leaderboardService.publishScore(99, 500, 10); // Nonexistent user should be created
         assertTrue(leaderboardService.getTopScores(1).stream().anyMatch(score -> score.getPlayerId() == 99));
     }
 }

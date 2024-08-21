@@ -22,7 +22,7 @@ public class GameServiceTest {
 
     @Test
     public void testPublishScore() throws IOException {
-        gameService.publishScore(1, 100);
+        gameService.publishScore(1, 100, 10);
         BufferedReader reader = new BufferedReader(new FileReader(scoreFilePath));
         String line = reader.readLine();
         assertNotNull(line);
@@ -34,7 +34,7 @@ public class GameServiceTest {
     public void testPublishScoreWithNewUser() {
         UserService userService = UserService.getInstance();
         userService.registerUser(2, "Bob", UserType.PLAYER);
-        gameService.publishScore(3, 200); // New user
+        gameService.publishScore(3, 200, 10); // New user
         assertTrue(userService.userExists(3));
     }
 
@@ -42,7 +42,7 @@ public class GameServiceTest {
     public void testFileWritingErrorHandling() {
         // Simulate a file writing error by using a non-writable path
         GameService faultyGameService = new GameService("/invalid/path/scores.txt");
-        faultyGameService.publishScore(1, 100); // Should handle the exception
+        faultyGameService.publishScore(1, 100, 10); // Should handle the exception
         // No assertion here, just checking if it runs without exception
     }
 }
