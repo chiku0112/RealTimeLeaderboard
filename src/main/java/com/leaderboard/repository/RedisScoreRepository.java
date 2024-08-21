@@ -2,13 +2,13 @@ package com.leaderboard.repository;
 
 import com.leaderboard.models.Score;
 import com.leaderboard.service.UserService;
+import com.leaderboard.strategy.ScoreSortingStrategy;
+import com.leaderboard.strategy.SortByScoreAndTimeStrategy;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.resps.Tuple;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RedisScoreRepository {
     private Jedis jedis;
@@ -40,17 +40,8 @@ public class RedisScoreRepository {
     public List<Score> findTopScores(int limit) {
         // Retrieve the top scores using Redis sorted set
         List<Tuple> playersWithScores = jedis.zrevrangeWithScores("scores", 0, limit - 1);
-
-        return playersWithScores.stream()
-                .map(tuple -> {
-                    String[] parts = tuple.getElement().split(":");
-                    int playerId = Integer.parseInt(parts[0]);
-                    int timeTaken = Integer.parseInt(parts[1]);
-                    return new Score(0, playerId, (int) tuple.getScore(), userService.getUserName(playerId), timeTaken);
-                })
-                .sorted(Comparator.comparingInt(Score::getScore).reversed()  // Sort by score in descending order
-                        .thenComparingInt(Score::getTimeTaken))  // Then sort by time taken in ascending order
-                .collect(Collectors.toList());
+        ScoreSortingStrategy sortingStrategy = new SortByScoreAndTimeStrategy();
+        return sortingStrategy.sort(playersWithScores);
     }
 }
 
