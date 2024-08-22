@@ -2,6 +2,7 @@ package com.leaderboard.service;
 
 import com.leaderboard.models.Score;
 import com.leaderboard.repository.RedisScoreRepository;
+import com.leaderboard.repository.ScoreRepository;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,9 +13,9 @@ import java.util.Scanner;
 
 public class LeaderboardService {
     private static LeaderboardService instance;
-    private RedisScoreRepository scoreRepository;
-    private UserService userService;
-    private String scoreFilePath;;
+    private final ScoreRepository scoreRepository;
+    private final UserService userService;
+    private final String scoreFilePath;;
 
     private LeaderboardService(String scoreFilePath, RedisScoreRepository scoreRepository) {
         this.scoreRepository = new RedisScoreRepository();
@@ -51,7 +52,6 @@ public class LeaderboardService {
     }
 
     public String publishScore(int playerId, int score, int timeTaken) {
-        userService.verifyPlayer(playerId);
         return scoreRepository.addScore(playerId, score, timeTaken);
     }
 
@@ -70,7 +70,6 @@ public class LeaderboardService {
                     ", PlayerName: " + playerName +
                     ", Score: " + score.getScore() +
                     ", TimeTaken: " + score.getTimeTaken() + "ms");
-//            System.out.println("PlayerID: " + score.getPlayerId() + ", PlayerName: " + playerName + ", Score: " + score.getScore());
         }
         System.out.println("-----------------------------------");
         System.out.println("-----------------------------------");
@@ -78,7 +77,7 @@ public class LeaderboardService {
 
     private void clearScoreFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(scoreFilePath))) {
-            writer.write("");  // Clear the file
+            writer.write("");
             System.out.println("Score file cleared.");
         } catch (IOException e) {
             System.out.println("Error clearing score file: " + e.getMessage());

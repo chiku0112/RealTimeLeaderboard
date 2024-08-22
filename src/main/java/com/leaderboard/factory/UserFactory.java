@@ -7,10 +7,10 @@ import com.leaderboard.models.User;
 
 public class UserFactory {
     public static User createUser(int id, String userName, UserType userType) {
-        switch (userType.toString().toLowerCase()) {
-            case "admin":
+        switch (userType) {
+            case ADMIN:
                 return new Admin(id, userName, userType);
-            case "player":
+            case PLAYER:
                 return new Player(id, userName, userType);
             // Additional cases for new user types...
             default:

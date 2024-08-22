@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SortByScoreAndTimeStrategy implements ScoreSortingStrategy{
-    private UserService userService = UserService.getInstance();
+    private final UserService userService = UserService.getInstance();
 
     @Override
     public List<Score> sort(List<Tuple> scores) {

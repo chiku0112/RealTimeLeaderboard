@@ -1,7 +1,6 @@
 package com.leaderboard.repository;
 
 import com.leaderboard.models.Score;
-import com.leaderboard.service.UserService;
 import com.leaderboard.strategy.ScoreSortingStrategy;
 import com.leaderboard.strategy.SortByScoreAndTimeStrategy;
 import redis.clients.jedis.Jedis;
@@ -10,15 +9,14 @@ import redis.clients.jedis.resps.Tuple;
 
 import java.util.List;
 
-public class RedisScoreRepository {
+public class RedisScoreRepository implements ScoreRepository {
     private Jedis jedis;
-    private UserService userService;
 
     public RedisScoreRepository() {
         this.jedis = new Jedis("localhost", 6379);
-        userService = UserService.getInstance();
     }
 
+    @Override
     public String addScore(int playerId, int score, int timeTaken) {
         String member = playerId + ":" + timeTaken;
         Double existingScore = jedis.zscore("scores", member);
@@ -37,6 +35,7 @@ public class RedisScoreRepository {
         return "Score added successfully";
     }
 
+    @Override
     public List<Score> findTopScores(int limit) {
         // Retrieve the top scores using Redis sorted set
         List<Tuple> playersWithScores = jedis.zrevrangeWithScores("scores", 0, limit - 1);

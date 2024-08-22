@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class UserService {
     private static UserService instance;
-    private HashMap<Integer, User> userStore;
+    private final HashMap<Integer, User> userStore;
 
     private UserService(){
         userStore = new HashMap<>();
@@ -30,22 +30,29 @@ public class UserService {
         }
     }
 
+    public void verifyPlayer(int id, int score, int timeTaken){
+        if (!userStore.containsKey(id)) {
+            String randomUsername = "player" + id;
+            registerUser(id, randomUsername, UserType.PLAYER);
+            System.out.println("New Player: [" + randomUsername + "] has joined the game!");
+            System.out.println("Scored : "+ score + " in " + timeTaken + " milliseconds");
+            System.out.println();
+        } else {
+            System.out.println("Existing Player: [" + getUserName(id) + "] is already on the game!");
+            System.out.println("Scored : "+ score + " in " + timeTaken + " milliseconds");
+            System.out.println();
+        }
+    }
+
+    public Boolean userExists(int id){
+        return userStore.containsKey(id);
+    }
+
     public String getUserName(int id){
         if(userStore.containsKey(id)){
             return userStore.get(id).getUsername();
         } else {
             return "player"+id;
         }
-    }
-
-    public void verifyPlayer(int id){
-        if(!userStore.containsKey(id)){
-            User user = UserFactory.createUser(id, "nn", UserType.PLAYER);
-            userStore.put(id, user);
-        }
-    }
-
-    public Boolean userExists(int id){
-        return userStore.containsKey(id);
     }
 }
